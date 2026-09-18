@@ -3,125 +3,339 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Admin Panel - New Modern High School Patrara</title>
 
 <style>
-*{box-sizing:border-box}
-body{margin:0;padding:0;font-family:Arial,sans-serif;background:#f2f5f9;color:#222}
-.container{width:94%;max-width:1000px;margin:30px auto}
-.header{background:#0d47a1;color:#fff;padding:20px;border-radius:12px;text-align:center;margin-bottom:20px}
-.header h1{margin:0;font-size:25px}
-.header p{margin:7px 0 0;font-size:14px}
-.box{background:#fff;padding:25px;border-radius:12px;box-shadow:0 3px 15px rgba(0,0,0,.08);margin-bottom:20px}
-.box h2{margin-top:0;color:#0d47a1}
-label{display:block;font-weight:bold;margin-top:14px;margin-bottom:6px}
-input{width:100%;padding:13px;border:1px solid #ccc;border-radius:7px;font-size:15px}
-button{border:none;padding:12px 18px;border-radius:7px;cursor:pointer;font-size:15px;margin-top:15px}
-.login-btn{width:100%;background:#0d47a1;color:#fff}
-.reset-btn{width:100%;background:#eee;color:#333}
-.logout-btn{background:#d32f2f;color:#fff;float:right;margin-top:0}
-.refresh-btn{background:#2e7d32;color:#fff}
-.tab-btn{background:#e8eef7;color:#0d47a1;margin-right:8px}
-.tab-btn.active{background:#0d47a1;color:#fff}
-.message{margin-top:15px;font-size:14px;line-height:1.5}
-.admin-top{overflow:hidden;margin-bottom:15px}
-.admin-top h2{float:left;margin:5px 0}
-.search{margin-bottom:10px}
-.admission-card{border:1px solid #ddd;border-radius:10px;padding:18px;margin-bottom:15px;background:#fafafa}
-.admission-card h3{margin:0 0 12px;color:#0d47a1}
-.admission-card p{margin:7px 0;line-height:1.5}
-.delete-btn{background:#d32f2f;color:#fff}
-.empty{text-align:center;padding:25px;color:#777}
-.loading{text-align:center;padding:20px;color:#555}
-.success{color:green}
-.error{color:#c62828}
-.clear{clear:both}
-.query-type{display:inline-block;background:#e3f2fd;color:#0d47a1;padding:4px 9px;border-radius:15px;font-size:12px;font-weight:bold}
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    padding:0;
+    font-family:Arial,sans-serif;
+    background:#f2f5f9;
+    color:#222;
+}
+
+.container{
+    width:94%;
+    max-width:1000px;
+    margin:25px auto;
+}
+
+.header{
+    background:#0d47a1;
+    color:white;
+    padding:22px;
+    border-radius:12px;
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.header h1{
+    margin:0;
+    font-size:25px;
+}
+
+.header p{
+    margin:7px 0 0;
+    font-size:14px;
+}
+
+.box{
+    background:white;
+    padding:25px;
+    border-radius:12px;
+    box-shadow:0 3px 15px rgba(0,0,0,.08);
+    margin-bottom:20px;
+}
+
+.box h2{
+    margin-top:0;
+    color:#0d47a1;
+}
+
+label{
+    display:block;
+    font-weight:bold;
+    margin-top:14px;
+    margin-bottom:6px;
+}
+
+input{
+    width:100%;
+    padding:13px;
+    border:1px solid #ccc;
+    border-radius:7px;
+    font-size:15px;
+}
+
+button{
+    border:none;
+    padding:12px 18px;
+    border-radius:7px;
+    cursor:pointer;
+    font-size:15px;
+    margin-top:15px;
+}
+
+.login-btn{
+    width:100%;
+    background:#0d47a1;
+    color:white;
+}
+
+.reset-btn{
+    width:100%;
+    background:#eeeeee;
+    color:#333;
+}
+
+.logout-btn{
+    background:#d32f2f;
+    color:white;
+}
+
+.refresh-btn{
+    background:#2e7d32;
+    color:white;
+}
+
+.tab-btn{
+    background:#e8eef7;
+    color:#0d47a1;
+    margin-right:8px;
+}
+
+.tab-btn.active{
+    background:#0d47a1;
+    color:white;
+}
+
+.message{
+    margin-top:15px;
+    font-size:14px;
+    line-height:1.5;
+}
+
+.success{
+    color:green;
+}
+
+.error{
+    color:#c62828;
+}
+
+.loading{
+    text-align:center;
+    padding:20px;
+    color:#555;
+}
+
+.empty{
+    text-align:center;
+    padding:25px;
+    color:#777;
+}
+
+.card{
+    border:1px solid #ddd;
+    border-radius:10px;
+    padding:18px;
+    margin-bottom:15px;
+    background:#fafafa;
+}
+
+.card h3{
+    margin:0 0 12px;
+    color:#0d47a1;
+}
+
+.card p{
+    margin:7px 0;
+    line-height:1.5;
+}
+
+.delete-btn{
+    background:#d32f2f;
+    color:white;
+}
+
+.query-type{
+    display:inline-block;
+    background:#e3f2fd;
+    color:#0d47a1;
+    padding:4px 9px;
+    border-radius:15px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.admin-top{
+    margin-bottom:15px;
+}
+
+.search{
+    margin-top:20px;
+    margin-bottom:10px;
+}
 
 @media(max-width:600px){
-.container{width:94%;margin:15px auto}
-.box{padding:18px}
-.header h1{font-size:21px}
-.admin-top h2{float:none;margin-bottom:10px}
-.logout-btn{float:none;width:100%}
-.tab-btn{width:100%;margin-right:0;margin-top:8px}
+
+    .container{
+        width:94%;
+        margin:15px auto;
+    }
+
+    .box{
+        padding:18px;
+    }
+
+    .header h1{
+        font-size:21px;
+    }
+
+    .tab-btn{
+        width:100%;
+        margin-right:0;
+        margin-top:8px;
+    }
+
+    .logout-btn{
+        width:100%;
+    }
 }
 </style>
+
 </head>
 
 <body>
 
 <div class="container">
 
-<div class="header">
-<h1>New Modern High School Patrara</h1>
-<p>Admin Panel</p>
+    <div class="header">
+        <h1>New Modern High School Patrara</h1>
+        <p>Admin Panel</p>
+    </div>
+
+
+    <!-- LOGIN -->
+
+    <div class="box" id="loginBox">
+
+        <h2>Admin Login</h2>
+
+        <label>Email Address</label>
+
+        <input
+            type="email"
+            id="email"
+            placeholder="Enter admin email"
+            autocomplete="email"
+        >
+
+        <label>Password</label>
+
+        <input
+            type="password"
+            id="password"
+            placeholder="Enter password"
+            autocomplete="current-password"
+        >
+
+        <button
+            class="login-btn"
+            id="loginBtn">
+            Login
+        </button>
+
+        <button
+            class="reset-btn"
+            id="resetBtn">
+            Forgot Password
+        </button>
+
+        <div
+            class="message"
+            id="message">
+        </div>
+
+    </div>
+
+
+    <!-- ADMIN PANEL -->
+
+    <div
+        class="box"
+        id="adminPanel"
+        style="display:none"
+    >
+
+        <div class="admin-top">
+
+            <h2>School Enquiries</h2>
+
+            <button
+                class="logout-btn"
+                id="logoutBtn">
+                Logout
+            </button>
+
+        </div>
+
+
+        <!-- TABS -->
+
+        <button
+            class="tab-btn active"
+            id="admissionTab">
+            Admission Enquiries
+        </button>
+
+        <button
+            class="tab-btn"
+            id="queryTab">
+            Parent Queries / Complaints
+        </button>
+
+
+        <!-- SEARCH -->
+
+        <div class="search">
+
+            <label>Search</label>
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search name, class, parent, phone or message..."
+            >
+
+        </div>
+
+
+        <button
+            class="refresh-btn"
+            id="refreshBtn">
+            Refresh
+        </button>
+
+
+        <!-- DATA -->
+
+        <div
+            id="list"
+            style="margin-top:20px">
+        </div>
+
+    </div>
+
 </div>
 
-<div class="box" id="loginBox">
 
-<h2>Admin Login</h2>
-
-<label for="email">Email Address</label>
-<input type="email" id="email" placeholder="Enter admin email" autocomplete="email">
-
-<label for="password">Password</label>
-<input type="password" id="password" placeholder="Enter password" autocomplete="current-password">
-
-<button class="login-btn" id="loginBtn">Login</button>
-<button class="reset-btn" id="resetBtn">Forgot Password</button>
-
-<div class="message" id="message"></div>
-
-</div>
-
-
-<div class="box" id="adminPanel" style="display:none">
-
-<div class="admin-top">
-<h2>School Enquiries</h2>
-
-<button class="logout-btn" id="logoutBtn">Logout</button>
-
-<div class="clear"></div>
-</div>
-
-<div>
-
-<button class="tab-btn active" id="admissionTab">
-Admission Enquiries
-</button>
-
-<button class="tab-btn" id="queryTab">
-Parent Queries / Complaints
-</button>
-
-</div>
-
-<div class="search">
-
-<label for="searchInput">Search</label>
-
-<input
-type="text"
-id="searchInput"
-placeholder="Search name, class, parent, phone or message..."
->
-
-</div>
-
-<button class="refresh-btn" id="refreshBtn">
-Refresh
-</button>
-
-<div id="list" style="margin-top:20px">
-<div class="loading">Loading...</div>
-</div>
-
-</div>
-
-</div>
-
+<!-- FIREBASE -->
 
 <script src="https://www.gstatic.com/firebasejs/12.19.0/firebase-app-compat.js"></script>
 
@@ -132,396 +346,675 @@ Refresh
 
 <script>
 
-window.addEventListener('error',function(e){
+const firebaseConfig = {
 
-const msg=document.getElementById('message');
+    apiKey:
+    "AIzaSyAhKbPnZx8LKUV52VX26DaRwXwMXIGBd1w",
 
-if(msg&&e&&e.message){
+    authDomain:
+    "new-modern-academy-patrara.firebaseapp.com",
 
-msg.className='message error';
+    projectId:
+    "new-modern-academy-patrara",
 
-msg.textContent='JavaScript error: '+e.message;
+    storageBucket:
+    "new-modern-academy-patrara.firebasestorage.app",
 
-}
+    messagingSenderId:
+    "345409481080",
 
-});
+    appId:
+    "1:345409481080:web:81d9237018c6d716d1c08d",
 
-
-const firebaseConfig={
-
-apiKey:"AIzaSyAhKbPnZx8LKUV52DaRwXwMXIGBd1w",
-
-authDomain:"new-modern-academy-patrara.firebaseapp.com",
-
-projectId:"new-modern-academy-patrara",
-
-storageBucket:"new-modern-academy-patrara.firebasestorage.app",
-
-messagingSenderId:"345409481080",
-
-appId:"1:345409481080:web:81d9237018c6d716d1c08d",
-
-measurementId:"G-EX84K79YJN"
-
+    measurementId:
+    "G-EX84K79YJN"
 };
 
+
+// START FIREBASE
 
 firebase.initializeApp(firebaseConfig);
 
-const auth=firebase.auth();
+const auth = firebase.auth();
 
-const db=firebase.firestore();
+const db = firebase.firestore();
 
-let mode='admission';
 
-let all=[];
+// VARIABLES
 
+let currentMode = "admission";
 
-const loginBox=document.getElementById('loginBox');
+let allRecords = [];
 
-const adminPanel=document.getElementById('adminPanel');
 
-const message=document.getElementById('message');
+// ELEMENTS
 
-const list=document.getElementById('list');
+const loginBox =
+    document.getElementById("loginBox");
 
-const searchInput=document.getElementById('searchInput');
+const adminPanel =
+    document.getElementById("adminPanel");
 
+const message =
+    document.getElementById("message");
 
-document.getElementById('loginBtn').onclick=async function(){
+const list =
+    document.getElementById("list");
 
-const email=document.getElementById('email').value.trim();
+const searchInput =
+    document.getElementById("searchInput");
 
-const password=document.getElementById('password').value;
 
-message.className='message';
+// LOGIN
 
-message.textContent='Logging in...';
+document
+.getElementById("loginBtn")
+.addEventListener("click", async function(){
 
-if(!email||!password){
+    const email =
+        document
+        .getElementById("email")
+        .value
+        .trim();
 
-message.className='message error';
+    const password =
+        document
+        .getElementById("password")
+        .value;
 
-message.textContent='Please enter email and password.';
 
-return;
+    message.className = "message";
 
-}
+    message.textContent =
+        "Logging in...";
 
-try{
 
-await auth.signInWithEmailAndPassword(email,password);
+    if(!email || !password){
 
-message.className='message success';
+        message.className =
+            "message error";
 
-message.textContent='Login successful!';
+        message.textContent =
+            "Please enter email and password.";
 
-}
+        return;
+    }
 
-catch(e){
 
-console.error(e);
+    try{
 
-message.className='message error';
+        await auth
+        .signInWithEmailAndPassword(
+            email,
+            password
+        );
 
-message.innerHTML='❌ Login failed.<br><br><b>'+
-escapeHtml(e.code||'')+
-'</b><br>'+
-escapeHtml(e.message||'');
+        message.className =
+            "message success";
 
-}
+        message.textContent =
+            "Login successful!";
 
-};
+    }
 
+    catch(error){
 
-document.getElementById('resetBtn').onclick=async function(){
+        console.error(
+            "Firebase Login Error:",
+            error
+        );
 
-const email=document.getElementById('email').value.trim();
+        message.className =
+            "message error";
 
-if(!email){
+        message.innerHTML =
+            "❌ Login failed.<br><br>" +
+            "<b>" +
+            escapeHTML(error.code || "") +
+            "</b><br>" +
+            escapeHTML(error.message || "");
 
-message.className='message error';
+    }
 
-message.textContent='Pehle email enter karo.';
+});
 
-return;
 
-}
+// FORGOT PASSWORD
 
-message.textContent='Sending password reset email...';
+document
+.getElementById("resetBtn")
+.addEventListener("click", async function(){
 
-try{
+    const email =
+        document
+        .getElementById("email")
+        .value
+        .trim();
 
-await auth.sendPasswordResetEmail(email);
 
-message.className='message success';
+    if(!email){
 
-message.textContent='✅ Password reset email sent.';
+        message.className =
+            "message error";
 
-}
+        message.textContent =
+            "Pehle email enter karo.";
 
-catch(e){
+        return;
+    }
 
-message.className='message error';
 
-message.textContent='❌ '+(e.message||e.code);
+    message.className =
+        "message";
 
-}
+    message.textContent =
+        "Sending password reset email...";
 
-};
 
+    try{
 
-document.getElementById('logoutBtn').onclick=function(){
+        await auth
+        .sendPasswordResetEmail(email);
 
-auth.signOut();
+        message.className =
+            "message success";
 
-};
+        message.textContent =
+            "✅ Password reset email sent.";
 
+    }
 
-document.getElementById('refreshBtn').onclick=loadCurrent;
+    catch(error){
 
+        message.className =
+            "message error";
 
-document.getElementById('admissionTab').onclick=function(){
+        message.textContent =
+            "❌ " +
+            (error.message || error.code);
 
-mode='admission';
+    }
 
-setTabs();
+});
 
-loadCurrent();
 
-};
+// LOGOUT
 
+document
+.getElementById("logoutBtn")
+.addEventListener("click", function(){
 
-document.getElementById('queryTab').onclick=function(){
+    auth.signOut();
 
-mode='query';
+});
 
-setTabs();
 
-loadCurrent();
-
-};
-
-
-searchInput.oninput=function(){
-
-display(filterData());
-
-};
-
+// AUTH STATE
 
 auth.onAuthStateChanged(function(user){
 
-if(user){
+    if(user){
 
-loginBox.style.display='none';
+        loginBox.style.display =
+            "none";
 
-adminPanel.style.display='block';
+        adminPanel.style.display =
+            "block";
 
-loadCurrent();
+        loadData();
 
-}
+    }
 
-else{
+    else{
 
-loginBox.style.display='block';
+        loginBox.style.display =
+            "block";
 
-adminPanel.style.display='none';
+        adminPanel.style.display =
+            "none";
 
-}
+    }
+
+});
+
+
+// ADMISSION TAB
+
+document
+.getElementById("admissionTab")
+.addEventListener("click", function(){
+
+    currentMode =
+        "admission";
+
+    document
+    .getElementById("admissionTab")
+    .classList.add("active");
+
+    document
+    .getElementById("queryTab")
+    .classList.remove("active");
+
+    searchInput.value = "";
+
+    loadData();
 
 });
 
 
-function setTabs(){
+// QUERY TAB
 
-document.getElementById('admissionTab')
-.classList.toggle('active',mode==='admission');
+document
+.getElementById("queryTab")
+.addEventListener("click", function(){
 
-document.getElementById('queryTab')
-.classList.toggle('active',mode==='query');
+    currentMode =
+        "query";
 
-searchInput.value='';
+    document
+    .getElementById("queryTab")
+    .classList.add("active");
 
-}
+    document
+    .getElementById("admissionTab")
+    .classList.remove("active");
 
+    searchInput.value = "";
 
-async function loadCurrent(){
-
-list.innerHTML='<div class="loading">Loading...</div>';
-
-try{
-
-const col=mode==='admission'
-?'admission'
-:'parent_queries';
-
-const snap=await db.collection(col).get();
-
-all=[];
-
-snap.forEach(function(d){
-
-all.push({
-id:d.id,
-...d.data()
-});
+    loadData();
 
 });
 
-display(all);
 
-}
+// REFRESH
 
-catch(e){
+document
+.getElementById("refreshBtn")
+.addEventListener("click", function(){
 
-list.innerHTML='<div class="message error">'+
-'❌ Could not load data.<br><b>'+
-escapeHtml(e.code||'')+
-'</b><br>'+
-escapeHtml(e.message||'')+
-'</div>';
-
-}
-
-}
-
-
-function filterData(){
-
-const q=searchInput.value.trim().toLowerCase();
-
-if(!q)return all;
-
-return all.filter(function(x){
-
-return Object.values(x).some(function(v){
-
-return String(v??'')
-.toLowerCase()
-.includes(q);
+    loadData();
 
 });
 
-});
 
-}
+// SEARCH
 
+searchInput
+.addEventListener("input", function(){
 
-function display(data){
+    const text =
+        searchInput.value
+        .trim()
+        .toLowerCase();
 
-if(!data.length){
+    if(!text){
 
-list.innerHTML=
-'<div class="empty">No records found.</div>';
+        displayRecords(allRecords);
 
-return;
-
-}
-
-list.innerHTML='';
-
-
-data.forEach(function(x,i){
-
-const card=document.createElement('div');
-
-card.className='admission-card';
+        return;
+    }
 
 
-if(mode==='admission'){
+    const filtered =
+        allRecords.filter(function(record){
 
-card.innerHTML=
-'<h3>'+(i+1)+'. '+
-escapeHtml(x.studentName||'Not provided')+
-'</h3>'+
-'<p><b>Class:</b> '+
-escapeHtml(x.className||'Not provided')+
-'</p>'+
-'<p><b>Parent / Guardian:</b> '+
-escapeHtml(x.parentName||'Not provided')+
-'</p>'+
-'<p><b>Phone:</b> '+
-escapeHtml(x.phone||'Not provided')+
-'</p>'+
-'<p><b>Address:</b> '+
-escapeHtml(x.address||'Not provided')+
-'</p>'+
-'<button class="delete-btn" onclick="deleteRecord(\''+
-x.id+
-'\')">Delete</button>';
+            return Object
+            .values(record)
+            .some(function(value){
 
-}
+                return String(
+                    value ?? ""
+                )
+                .toLowerCase()
+                .includes(text);
 
-else{
+            });
 
-card.innerHTML=
-'<h3>'+(i+1)+'. '+
-escapeHtml(x.parentName||'Not provided')+
-' <span class="query-type">'+
-escapeHtml(x.queryType||'Query')+
-'</span></h3>'+
-'<p><b>Student:</b> '+
-escapeHtml(x.studentName||'Not provided')+
-'</p>'+
-'<p><b>Class:</b> '+
-escapeHtml(x.className||'Not provided')+
-'</p>'+
-'<p><b>Phone:</b> '+
-escapeHtml(x.phone||'Not provided')+
-'</p>'+
-'<p><b>Message:</b> '+
-escapeHtml(x.message||'Not provided')+
-'</p>'+
-'<button class="delete-btn" onclick="deleteRecord(\''+
-x.id+
-'\')">Delete</button>';
+        });
 
-}
 
-list.appendChild(card);
+    displayRecords(filtered);
 
 });
 
+
+// LOAD FIRESTORE DATA
+
+async function loadData(){
+
+    list.innerHTML =
+        '<div class="loading">Loading...</div>';
+
+
+    try{
+
+        const collectionName =
+            currentMode === "admission"
+            ? "admission"
+            : "parent_queries";
+
+
+        const snapshot =
+            await db
+            .collection(collectionName)
+            .get();
+
+
+        allRecords = [];
+
+
+        snapshot.forEach(function(doc){
+
+            allRecords.push({
+
+                id: doc.id,
+
+                ...doc.data()
+
+            });
+
+        });
+
+
+        allRecords.sort(function(a,b){
+
+            const aTime =
+                a.createdAt &&
+                a.createdAt.seconds
+                ? a.createdAt.seconds
+                : 0;
+
+            const bTime =
+                b.createdAt &&
+                b.createdAt.seconds
+                ? b.createdAt.seconds
+                : 0;
+
+            return bTime - aTime;
+
+        });
+
+
+        displayRecords(allRecords);
+
+    }
+
+    catch(error){
+
+        console.error(
+            "Firestore Error:",
+            error
+        );
+
+
+        list.innerHTML =
+            '<div class="message error">' +
+
+            '❌ Could not load data.<br><br>' +
+
+            '<b>' +
+            escapeHTML(error.code || "") +
+            '</b><br>' +
+
+            escapeHTML(error.message || "") +
+
+            '</div>';
+
+    }
+
 }
 
+
+// DISPLAY RECORDS
+
+function displayRecords(records){
+
+    if(!records.length){
+
+        list.innerHTML =
+            '<div class="empty">' +
+            'No records found.' +
+            '</div>';
+
+        return;
+    }
+
+
+    list.innerHTML = "";
+
+
+    records.forEach(function(record,index){
+
+        const card =
+            document.createElement("div");
+
+        card.className =
+            "card";
+
+
+        if(currentMode === "admission"){
+
+            card.innerHTML =
+
+                "<h3>" +
+
+                (index + 1) +
+                ". " +
+
+                escapeHTML(
+                    record.studentName ||
+                    "Not provided"
+                ) +
+
+                "</h3>" +
+
+
+                "<p><b>Class:</b> " +
+
+                escapeHTML(
+                    record.className ||
+                    "Not provided"
+                ) +
+
+                "</p>" +
+
+
+                "<p><b>Parent / Guardian:</b> " +
+
+                escapeHTML(
+                    record.parentName ||
+                    "Not provided"
+                ) +
+
+                "</p>" +
+
+
+                "<p><b>Phone:</b> " +
+
+                escapeHTML(
+                    record.phone ||
+                    "Not provided"
+                ) +
+
+                "</p>" +
+
+
+                "<p><b>Address:</b> " +
+
+                escapeHTML(
+                    record.address ||
+                    "Not provided"
+                ) +
+
+                "</p>";
+
+
+        }
+
+        else{
+
+            card.innerHTML =
+
+                "<h3>" +
+
+                (index + 1) +
+                ". " +
+
+                escapeHTML(
+                    record.parentName ||
+                    "Not provided"
+                ) +
+
+                ' <span class="query-type">' +
+
+                escapeHTML(
+                    record.queryType ||
+                    "Query"
+                ) +
+
+                "</span></h3>" +
+
+
+                "<p><b>Student:</b> " +
+
+                escapeHTML(
+                    record.studentName ||
+                    "Not provided"
+                ) +
+
+                "</p>" +
+
+
+                "<p><b>Class:</b> " +
+
+                escapeHTML(
+                    record.className ||
+                    "Not provided"
+                ) +
+
+                "</p>" +
+
+
+                "<p><b>Phone:</b> " +
+
+                escapeHTML(
+                    record.phone ||
+                    "Not provided"
+                ) +
+
+                "</p>" +
+
+
+                "<p><b>Message:</b> " +
+
+                escapeHTML(
+                    record.message ||
+                    "Not provided"
+                ) +
+
+                "</p>";
+
+        }
+
+
+        const deleteButton =
+            document.createElement("button");
+
+
+        deleteButton.className =
+            "delete-btn";
+
+
+        deleteButton.textContent =
+            "Delete";
+
+
+        deleteButton.addEventListener(
+            "click",
+            function(){
+
+                deleteRecord(record.id);
+
+            }
+        );
+
+
+        card.appendChild(
+            deleteButton
+        );
+
+
+        list.appendChild(
+            card
+        );
+
+    });
+
+}
+
+
+// DELETE RECORD
 
 async function deleteRecord(id){
 
-if(!confirm('Kya aap is record ko delete karna chahte ho?'))
+    const confirmed =
+        confirm(
+            "Kya aap is record ko delete karna chahte ho?"
+        );
 
-return;
 
-try{
+    if(!confirmed){
 
-await db
-.collection(mode==='admission'
-?'admission'
-:'parent_queries')
-.doc(id)
-.delete();
+        return;
 
-await loadCurrent();
+    }
+
+
+    try{
+
+        const collectionName =
+            currentMode === "admission"
+            ? "admission"
+            : "parent_queries";
+
+
+        await db
+        .collection(collectionName)
+        .doc(id)
+        .delete();
+
+
+        await loadData();
+
+    }
+
+    catch(error){
+
+        alert(
+            "Delete failed: " +
+            (error.message || error.code)
+        );
+
+    }
 
 }
 
-catch(e){
 
-alert('Delete failed: '+(e.message||e.code));
+// HTML SECURITY
 
-}
+function escapeHTML(value){
 
-}
+    return String(value)
 
+        .replace(/&/g,"&amp;")
 
-function escapeHtml(v){
+        .replace(/</g,"&lt;")
 
-return String(v)
-.replace(/&/g,'&amp;')
-.replace(/</g,'&lt;')
-.replace(/>/g,'&gt;')
-.replace(/"/g,'&quot;')
-.replace(/'/g,'&#039;');
+        .replace(/>/g,"&gt;")
+
+        .replace(/"/g,"&quot;")
+
+        .replace(/'/g,"&#039;");
 
 }
 
