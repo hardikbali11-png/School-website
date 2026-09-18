@@ -3,106 +3,201 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Login - New Modern High School Patrara</title>
+
+  <title>Admin Panel - New Modern High School Patrara</title>
 
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f1f5f9;
-      color: #172554;
+    * {
+      box-sizing: border-box;
     }
 
-    header {
-      background: #174a7c;
-      color: white;
-      padding: 20px;
-      font-size: 25px;
-      font-weight: bold;
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background: #f2f5f9;
+      color: #222;
     }
 
     .container {
-      max-width: 650px;
-      margin: 100px auto;
+      width: 94%;
+      max-width: 1000px;
+      margin: 30px auto;
+    }
+
+    .header {
+      background: #0d47a1;
+      color: white;
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 25px;
+    }
+
+    .header p {
+      margin: 7px 0 0;
+      font-size: 14px;
+    }
+
+    .box {
       background: white;
-      padding: 35px;
-      border-radius: 25px;
-      box-shadow: 0 5px 25px rgba(0,0,0,0.12);
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+      margin-bottom: 20px;
     }
 
-    h1 {
-      font-size: 40px;
-      margin-bottom: 15px;
+    .box h2 {
+      margin-top: 0;
+      color: #0d47a1;
     }
 
-    p {
-      font-size: 20px;
+    label {
+      display: block;
+      font-weight: bold;
+      margin-top: 14px;
+      margin-bottom: 6px;
     }
 
     input {
       width: 100%;
-      box-sizing: border-box;
-      padding: 17px;
-      margin: 10px 0;
+      padding: 13px;
       border: 1px solid #ccc;
-      border-radius: 12px;
-      font-size: 18px;
+      border-radius: 7px;
+      font-size: 15px;
     }
 
     button {
-      width: 100%;
-      padding: 17px;
-      margin-top: 15px;
       border: none;
-      border-radius: 12px;
-      background: #174a7c;
+      padding: 12px 18px;
+      border-radius: 7px;
+      cursor: pointer;
+      font-size: 15px;
+      margin-top: 15px;
+    }
+
+    .login-btn {
+      width: 100%;
+      background: #0d47a1;
       color: white;
-      font-size: 20px;
-      font-weight: bold;
     }
 
-    button:active {
-      opacity: 0.8;
+    .login-btn:hover {
+      background: #083579;
     }
 
-    #message {
-      margin-top: 20px;
-      font-size: 18px;
-      font-weight: bold;
-      color: #c62828;
+    .reset-btn {
+      width: 100%;
+      background: #eeeeee;
+      color: #333;
     }
 
-    #adminPanel {
-      display: none;
+    .logout-btn {
+      background: #d32f2f;
+      color: white;
+      float: right;
+      margin-top: 0;
     }
 
-    .admission {
-      background: #f8fafc;
-      padding: 20px;
-      margin: 15px 0;
-      border-radius: 15px;
-      border-left: 5px solid #174a7c;
+    .refresh-btn {
+      background: #2e7d32;
+      color: white;
     }
 
-    .logout {
-      background: #c62828;
+    .message {
+      margin-top: 15px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .admin-top {
+      overflow: hidden;
+      margin-bottom: 15px;
+    }
+
+    .admin-top h2 {
+      float: left;
+      margin: 5px 0;
+    }
+
+    .search {
       margin-bottom: 20px;
     }
 
-    .delete {
-      background: #b91c1c;
-      font-size: 15px;
-      padding: 10px;
+    .admission-card {
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 18px;
+      margin-bottom: 15px;
+      background: #fafafa;
     }
 
-    @media(max-width: 700px) {
+    .admission-card h3 {
+      margin: 0 0 12px;
+      color: #0d47a1;
+    }
+
+    .admission-card p {
+      margin: 7px 0;
+      line-height: 1.5;
+    }
+
+    .delete-btn {
+      background: #d32f2f;
+      color: white;
+    }
+
+    .empty {
+      text-align: center;
+      padding: 25px;
+      color: #777;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 20px;
+      color: #555;
+    }
+
+    .success {
+      color: green;
+    }
+
+    .error {
+      color: #c62828;
+    }
+
+    .clear {
+      clear: both;
+    }
+
+    @media (max-width: 600px) {
       .container {
-        margin: 50px 10px;
-        padding: 25px;
+        width: 94%;
+        margin: 15px auto;
       }
 
-      h1 {
-        font-size: 32px;
+      .box {
+        padding: 18px;
+      }
+
+      .header h1 {
+        font-size: 21px;
+      }
+
+      .admin-top h2 {
+        float: none;
+        margin-bottom: 10px;
+      }
+
+      .logout-btn {
+        float: none;
+        width: 100%;
       }
     }
   </style>
@@ -110,275 +205,665 @@
 
 <body>
 
-<header>
-  🏫 New Modern High School Patrara
-</header>
+  <div class="container">
 
-<div class="container">
-
-  <div id="loginBox">
-    <h1>🔐 Admin Login</h1>
-    <p>Login to view admission enquiries.</p>
-
-    <input
-      type="email"
-      id="email"
-      placeholder="Email"
-      autocomplete="email"
-    >
-
-    <input
-      type="password"
-      id="password"
-      placeholder="Password"
-      autocomplete="current-password"
-    >
-
-    <button onclick="login()">Login</button>
-
-    <button
-      onclick="resetPassword()"
-      style="background:#64748b; font-size:16px;"
-    >
-      Forgot Password?
-    </button>
-
-    <div id="message"></div>
-  </div>
+    <!-- HEADER -->
+    <div class="header">
+      <h1>New Modern High School Patrara</h1>
+      <p>Admin Panel</p>
+    </div>
 
 
-  <div id="adminPanel">
+    <!-- LOGIN BOX -->
+    <div class="box" id="loginBox">
 
-    <h1>📋 Admission Enquiries</h1>
+      <h2>Admin Login</h2>
 
-    <button class="logout" onclick="logout()">Logout</button>
+      <label for="email">Email Address</label>
+      <input
+        type="email"
+        id="email"
+        placeholder="Enter admin email"
+        autocomplete="email"
+      >
 
-    <input
-      type="text"
-      id="search"
-      placeholder="Search student, parent, class, phone..."
-      oninput="filterAdmissions()"
-    >
+      <label for="password">Password</label>
+      <input
+        type="password"
+        id="password"
+        placeholder="Enter password"
+        autocomplete="current-password"
+      >
 
-    <div id="admissionList">
-      Loading...
+      <button class="login-btn" id="loginBtn">
+        Login
+      </button>
+
+      <button class="reset-btn" id="resetBtn">
+        Forgot Password
+      </button>
+
+      <div class="message" id="message"></div>
+
+    </div>
+
+
+    <!-- ADMIN PANEL -->
+    <div class="box" id="adminPanel" style="display:none;">
+
+      <div class="admin-top">
+
+        <h2>Admission Enquiries</h2>
+
+        <button class="logout-btn" id="logoutBtn">
+          Logout
+        </button>
+
+        <div class="clear"></div>
+
+      </div>
+
+
+      <!-- SEARCH -->
+      <div class="search">
+
+        <label for="searchInput">
+          Search Admission
+        </label>
+
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search by student name, class, parent or phone..."
+        >
+
+      </div>
+
+
+      <button class="refresh-btn" id="refreshBtn">
+        Refresh Admissions
+      </button>
+
+      <div id="admissionList" style="margin-top:20px;">
+        <div class="loading">
+          Loading...
+        </div>
+      </div>
+
     </div>
 
   </div>
 
-</div>
+
+  <!-- FIREBASE COMPAT LIBRARIES -->
+  <script src="https://www.gstatic.com/firebasejs/12.19.0/firebase-app-compat.js"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/12.19.0/firebase-auth-compat.js"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore-compat.js"></script>
 
 
-<script type="module">
+  <script>
 
-  import { initializeApp }
-    from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    // ==========================================
+    // FIREBASE CONFIGURATION
+    // ==========================================
 
-  import {
-    getAuth,
-    signInWithEmailAndPassword,
-    sendPasswordResetEmail,
-    signOut
-  }
-    from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
-  import {
-    getFirestore,
-    collection,
-    getDocs,
-    deleteDoc,
-    doc
-  }
-    from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+    const firebaseConfig = {
+      apiKey: "AIzaSyAhKbPnZx8LKUV52VX26DaRwXwMXIGBd1w",
+      authDomain: "new-modern-academy-patrara.firebaseapp.com",
+      projectId: "new-modern-academy-patrara",
+      storageBucket: "new-modern-academy-patrara.firebasestorage.app",
+      messagingSenderId: "345409481080",
+      appId: "1:345409481080:web:81d9237018c6d716d1c08d",
+      measurementId: "G-EX84K79YJN"
+    };
 
 
-  // FIREBASE CONFIG
+    // ==========================================
+    // INITIALIZE FIREBASE
+    // ==========================================
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyAhKbPnZx8LKUV52VX26DaRwXwMXIGBd1w",
-    authDomain: "new-modern-academy-patrara.firebaseapp.com",
-    projectId: "new-modern-academy-patrara",
-    storageBucket: "new-modern-academy-patrara.firebasestorage.app",
-    messagingSenderId: "345409481080",
-    appId: "1:345409481080:web:81d9237018c6d716d1c08d",
-    measurementId: "G-EX84K79YJN"
-  };
+    firebase.initializeApp(firebaseConfig);
+
+    const auth = firebase.auth();
+
+    const db = firebase.firestore();
 
 
-  const app = initializeApp(firebaseConfig);
+    // ==========================================
+    // VARIABLES
+    // ==========================================
 
-  const auth = getAuth(app);
-
-  const db = getFirestore(app);
-
-
-  let allAdmissions = [];
+    let allAdmissions = [];
 
 
-  // LOGIN
+    // ==========================================
+    // ELEMENTS
+    // ==========================================
 
-  window.login = async function() {
+    const loginBox =
+      document.getElementById("loginBox");
 
-    const email =
-      document.getElementById("email").value.trim();
+    const adminPanel =
+      document.getElementById("adminPanel");
 
-    const password =
-      document.getElementById("password").value;
+    const loginBtn =
+      document.getElementById("loginBtn");
+
+    const resetBtn =
+      document.getElementById("resetBtn");
+
+    const logoutBtn =
+      document.getElementById("logoutBtn");
+
+    const refreshBtn =
+      document.getElementById("refreshBtn");
+
+    const searchInput =
+      document.getElementById("searchInput");
 
     const message =
       document.getElementById("message");
 
-    message.style.color = "#c62828";
-    message.innerText = "Logging in...";
+    const admissionList =
+      document.getElementById("admissionList");
 
-    if (!email || !password) {
+
+    // ==========================================
+    // LOGIN
+    // ==========================================
+
+    loginBtn.addEventListener("click", async function() {
+
+      const email =
+        document.getElementById("email").value.trim();
+
+      const password =
+        document.getElementById("password").value;
+
+
+      message.className = "message";
+      message.style.color = "#555";
+      message.innerText = "Logging in...";
+
+
+      if (!email || !password) {
+
+        message.className = "message error";
+        message.innerText =
+          "Please enter email and password.";
+
+        return;
+      }
+
+
+      try {
+
+        await auth.signInWithEmailAndPassword(
+          email,
+          password
+        );
+
+
+        message.className = "message success";
+
+        message.innerText =
+          "Login successful!";
+
+
+        loginBox.style.display = "none";
+
+        adminPanel.style.display = "block";
+
+
+        await loadAdmissions();
+
+      }
+
+      catch (error) {
+
+        console.error(error);
+
+        message.className = "message error";
+
+        message.innerHTML =
+          "❌ Login failed.<br><br>" +
+          "Firebase error: <b>" +
+          escapeHtml(error.code || "") +
+          "</b><br><br>" +
+          escapeHtml(error.message || "");
+
+      }
+
+    });
+
+
+    // ==========================================
+    // FORGOT PASSWORD
+    // ==========================================
+
+    resetBtn.addEventListener("click", async function() {
+
+      const email =
+        document.getElementById("email").value.trim();
+
+
+      message.className = "message";
+      message.innerText = "";
+
+
+      if (!email) {
+
+        message.className = "message error";
+
+        message.innerText =
+          "Pehle email enter karo.";
+
+        return;
+      }
+
+
+      message.style.color = "#555";
+
       message.innerText =
-        "Please enter email and password.";
-      return;
-    }
+        "Sending password reset email...";
 
-    try {
 
-      await signInWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
+      try {
 
-      message.style.color = "green";
-      message.innerText = "Login successful!";
+        await auth.sendPasswordResetEmail(email);
 
-      document.getElementById("loginBox").style.display = "none";
 
-      document.getElementById("adminPanel").style.display = "block";
+        message.className = "message success";
+
+        message.innerText =
+          "✅ Password reset email sent. " +
+          "Gmail inbox check karo.";
+
+      }
+
+      catch (error) {
+
+        console.error(error);
+
+        message.className = "message error";
+
+        message.innerHTML =
+          "❌ Reset failed.<br><br>" +
+          "Firebase error: <b>" +
+          escapeHtml(error.code || "") +
+          "</b><br><br>" +
+          escapeHtml(error.message || "");
+
+      }
+
+    });
+
+
+    // ==========================================
+    // LOGOUT
+    // ==========================================
+
+    logoutBtn.addEventListener("click", async function() {
+
+      try {
+
+        await auth.signOut();
+
+        adminPanel.style.display = "none";
+
+        loginBox.style.display = "block";
+
+        document.getElementById("password").value = "";
+
+        message.className = "message";
+
+        message.innerText =
+          "You have been logged out.";
+
+      }
+
+      catch (error) {
+
+        console.error(error);
+
+      }
+
+    });
+
+
+    // ==========================================
+    // REFRESH
+    // ==========================================
+
+    refreshBtn.addEventListener("click", function() {
 
       loadAdmissions();
 
-    } catch (error) {
-
-      console.error(error);
-
-      message.style.color = "#c62828";
-
-      message.innerHTML =
-        "❌ Login failed<br><br>" +
-        "Firebase error: <b>" +
-        error.code +
-        "</b><br><br>" +
-        error.message;
-
-    }
-
-  };
+    });
 
 
-  // PASSWORD RESET
+    // ==========================================
+    // LOAD ADMISSIONS
+    // ==========================================
 
-  window.resetPassword = async function() {
+    async function loadAdmissions() {
 
-    const email =
-      document.getElementById("email").value.trim();
+      admissionList.innerHTML =
+        '<div class="loading">Loading admissions...</div>';
 
-    const message =
-      document.getElementById("message");
 
-    if (!email) {
+      try {
 
-      message.style.color = "#c62828";
+        const snapshot =
+          await db.collection("admission").get();
 
-      message.innerText =
-        "Pehle email enter karo.";
 
-      return;
-    }
+        allAdmissions = [];
 
-    try {
 
-      await sendPasswordResetEmail(
-        auth,
-        email
-      );
+        snapshot.forEach(function(doc) {
 
-      message.style.color = "green";
+          allAdmissions.push({
 
-      message.innerText =
-        "✅ Password reset email sent. Gmail inbox check karo.";
+            id: doc.id,
 
-    } catch (error) {
+            ...doc.data()
 
-      console.error(error);
+          });
 
-      message.style.color = "#c62828";
+        });
 
-      message.innerHTML =
-        "❌ Reset failed<br><br>" +
-        "Firebase error: <b>" +
-        error.code +
-        "</b><br><br>" +
-        error.message;
+
+        displayAdmissions(allAdmissions);
+
+      }
+
+      catch (error) {
+
+        console.error(error);
+
+
+        admissionList.innerHTML =
+          '<div class="message error">' +
+          '❌ Could not load admission enquiries.<br><br>' +
+          'Firebase error: <b>' +
+          escapeHtml(error.code || "") +
+          '</b><br><br>' +
+          escapeHtml(error.message || "") +
+          '</div>';
+
+      }
 
     }
 
-  };
+
+    // ==========================================
+    // DISPLAY ADMISSIONS
+    // ==========================================
+
+    function displayAdmissions(data) {
+
+      if (!data || data.length === 0) {
+
+        admissionList.innerHTML =
+          '<div class="empty">' +
+          '<p>No admission enquiries found.</p>' +
+          '</div>';
+
+        return;
+
+      }
 
 
-  // LOAD ADMISSIONS
+      admissionList.innerHTML = "";
 
-  async function loadAdmissions() {
 
-    const list =
-      document.getElementById("admissionList");
+      data.forEach(function(item, index) {
 
-    list.innerHTML = "Loading...";
+        const card =
+          document.createElement("div");
 
-    try {
+        card.className =
+          "admission-card";
 
-      const snapshot =
-        await getDocs(
-          collection(db, "admission")
+
+        const studentName =
+          item.studentName || "Not provided";
+
+        const className =
+          item.className || "Not provided";
+
+        const parentName =
+          item.parentName || "Not provided";
+
+        const phone =
+          item.phone || "Not provided";
+
+        const address =
+          item.address || "Not provided";
+
+
+        card.innerHTML = `
+
+          <h3>
+            ${index + 1}. ${escapeHtml(studentName)}
+          </h3>
+
+          <p>
+            <strong>Class:</strong>
+            ${escapeHtml(className)}
+          </p>
+
+          <p>
+            <strong>Parent / Guardian:</strong>
+            ${escapeHtml(parentName)}
+          </p>
+
+          <p>
+            <strong>Phone:</strong>
+            ${escapeHtml(phone)}
+          </p>
+
+          <p>
+            <strong>Address:</strong>
+            ${escapeHtml(address)}
+          </p>
+
+          <button
+            class="delete-btn"
+            data-id="${escapeHtml(item.id)}"
+          >
+            Delete
+          </button>
+
+        `;
+
+
+        const deleteButton =
+          card.querySelector(".delete-btn");
+
+
+        deleteButton.addEventListener(
+          "click",
+          function() {
+
+            deleteAdmission(item.id);
+
+          }
         );
 
-      allAdmissions = [];
 
-      snapshot.forEach((item) => {
-
-        allAdmissions.push({
-          id: item.id,
-          ...item.data()
-        });
+        admissionList.appendChild(card);
 
       });
 
-      displayAdmissions(allAdmissions);
+    }
 
-    } catch (error) {
 
-      console.error(error);
+    // ==========================================
+    // DELETE ADMISSION
+    // ==========================================
 
-      list.innerHTML =
-        "❌ Could not load admission enquiries.<br><br>" +
-        error.code;
+    async function deleteAdmission(id) {
+
+      const confirmDelete =
+        confirm(
+          "Kya aap is admission enquiry ko delete karna chahte ho?"
+        );
+
+
+      if (!confirmDelete) {
+
+        return;
+
+      }
+
+
+      try {
+
+        await db
+          .collection("admission")
+          .doc(id)
+          .delete();
+
+
+        alert(
+          "Admission enquiry deleted successfully."
+        );
+
+
+        await loadAdmissions();
+
+      }
+
+      catch (error) {
+
+        console.error(error);
+
+        alert(
+          "Delete failed: " +
+          (error.message || error.code)
+        );
+
+      }
 
     }
 
-  }
+
+    // ==========================================
+    // SEARCH
+    // ==========================================
+
+    searchInput.addEventListener(
+      "input",
+      function() {
+
+        const search =
+          searchInput.value
+            .trim()
+            .toLowerCase();
 
 
-  // DISPLAY
+        if (!search) {
 
-  function displayAdmissions(data) {
+          displayAdmissions(allAdmissions);
 
-    const list =
-      document.getElementById("admissionList");
+          return;
 
-    if (data.length === 0) {
+        }
 
-      list.innerHTML =
-        "<p>No admission enquiries found.</p>";
 
-      return;
+        const filtered =
+          allAdmissions.filter(function(item) {
+
+            const student =
+              String(item.studentName || "")
+                .toLowerCase();
+
+            const className =
+              String(item.className || "")
+                .toLowerCase();
+
+            const parent =
+              String(item.parentName || "")
+                .toLowerCase();
+
+            const phone =
+              String(item.phone || "")
+                .toLowerCase();
+
+            const address =
+              String(item.address || "")
+                .toLowerCase();
+
+
+            return (
+              student.includes(search) ||
+              className.includes(search) ||
+              parent.includes(search) ||
+              phone.includes(search) ||
+              address.includes(search)
+            );
+
+          });
+
+
+        displayAdmissions(filtered);
+
+      }
+    );
+
+
+    // ==========================================
+    // AUTH STATE
+    // ==========================================
+
+    auth.onAuthStateChanged(function(user) {
+
+      if (user) {
+
+        loginBox.style.display = "none";
+
+        adminPanel.style.display = "block";
+
+        loadAdmissions();
+
+      }
+
+      else {
+
+        loginBox.style.display = "block";
+
+        adminPanel.style.display = "none";
+
+      }
+
+    });
+
+
+    // ==========================================
+    // SECURITY: HTML ESCAPE
+    // ==========================================
+
+    function escapeHtml(value) {
+
+      return String(value)
+
+        .replace(/&/g, "&amp;")
+
+        .replace(/</g, "&lt;")
+
+        .replace(/>/g, "&gt;")
+
+        .replace(/"/g, "&quot;")
+
+        .replace(/'/g, "&#039;");
+
     }
 
-    list.innerHTML = "";
+  </script>
 
-    data.forEach((item
+</body>
+</html>
