@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Admin Panel - New Modern High School Patrara</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f3f6fa;
+      color: #17233c;
+    }
+
+    header {
+      background: #123f70;
+      color: white;
+      padding: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h2 {
+      margin: 0;
+      font-size: 20px;
+    }
+
+    button {
+      border: none;
+      border-radius: 8px;
+      padding: 11px 16px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    #logoutBtn {
+      background: #d7193f;
+      color: white;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 25px auto;
+      padding: 15px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 14px;
+      padding: 22px;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+      margin-bottom: 20px;
+    }
+
+    #loginBox {
+      max-width: 420px;
+      margin: 70px auto;
+    }
+
+    input {
+      width: 100%;
+      padding: 13px;
+      margin: 8px 0;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 15px;
+    }
+
+    #loginBtn {
+      width: 100%;
+      background: #123f70;
+      color: white;
+      margin-top: 10px;
+    }
+
+    .message {
+      margin-top: 12px;
+      font-weight: bold;
+    }
+
+    .search {
+      margin-top: 15px;
+      margin-bottom: 15px;
+    }
+
+    .tableWrap {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 850px;
+    }
+
+    th,
+    td {
+      padding: 12px;
+      border-bottom: 1px solid #ddd;
+      text-align: left;
+    }
+
+    th {
+      background: #eef3f8;
+    }
+
+    .deleteBtn {
+      background: #d7193f;
+      color: white;
+    }
+
+    .empty {
+      text-align: center;
+      padding: 30px;
+      color: #666;
+    }
+
+    .success {
+      color: green;
+    }
+
+    .error {
+      color: #d7193f;
+    }
+
+    @media (max-width: 600px) {
+
+      header h2 {
+        font-size: 15px;
+      }
+
+      header {
+        padding: 14px;
+      }
+
+      .container {
+        padding: 10px;
+      }
+
+      .card {
+        padding: 16px;
+      }
+
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+
+  <header>
+
+    <h2>
+      🏫 New Modern High School Patrara
+    </h2>
+
+    <button
+      id="logoutBtn"
+      style="display:none;"
+    >
+      Logout
+    </button>
+
+  </header>
+
+
+  <!-- LOGIN -->
+
+  <div
+    id="loginBox"
+    class="card"
+  >
+
+    <h2>🔐 Admin Login</h2>
+
+    <p>
+      Login to view admission enquiries.
+    </p>
+
+    <input
+      type="email"
+      id="email"
+      placeholder="Admin Email"
+    >
+
+    <input
+      type="password"
+      id="password"
+      placeholder="Password"
+    >
+
+    <button id="loginBtn">
+      Login
+    </button>
+
+    <div
+      id="loginMessage"
+      class="message"
+    ></div>
+
+  </div>
+
+
+  <!-- ADMIN PANEL -->
+
+  <div
+    id="adminPanel"
+    class="container"
+    style="display:none;"
+  >
+
+    <div class="card">
+
+      <h2>
+        📋 Admission Enquiries
+      </h2>
+
+      <p>
+        All admission enquiries submitted from the website.
+      </p>
+
+      <input
+        type="text"
+        id="searchBox"
+        class="search"
+        placeholder="🔍 Search student, parent, class or phone..."
+      >
+
+      <h3 id="totalCount">
+        Total Enquiries: 0
+      </h3>
+
+
+      <div class="tableWrap">
+
+        <table>
+
+          <thead>
+
+            <tr>
+
+              <th>
+                Student Name
+              </th>
+
+              <th>
+                Class
+              </th>
+
+              <th>
+                Parent / Guardian
+              </th>
+
+              <th>
+                Phone
+              </th>
+
+              <th>
+                Address
+              </th>
+
+              <th>
+                Date
+              </th>
+
+              <th>
+                Action
+              </th>
+
+            </tr>
+
+          </thead>
+
+
+          <tbody id="admissionTable">
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- FIREBASE -->
+
+  <script type="module">
+
+    import {
+      initializeApp
+    }
+    from
+      "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+
+    import {
+      getAuth,
+      signInWithEmailAndPassword,
+      onAuthStateChanged,
+      signOut
+    }
+    from
+      "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+
+    import {
+      getFirestore,
+      collection,
+      getDocs,
+      deleteDoc,
+      doc
+    }
+    from
+      "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+
+    /* =========================================
+       FIREBASE CONFIG
+       ========================================= */
+
+    const firebaseConfig = {
+
+      apiKey: "AIzaSyAhKbPnZx8LKU5V2X6DaRwXMIX1GBd1w",
+
+      authDomain:
+        "new-modern-academy-patrara.firebaseapp.com",
+
+      projectId:
+        "new-modern-academy-patrara",
+
+      storageBucket:
+        "new-modern-academy-patrara.firebasestorage.app",
+
+      messagingSenderId:
+        "345409481080",
+
+      appId:
+        "1:345409481080:web:81d9237018c6d716d1c08d",
+
+      measurementId:
+        "G-EX84K79YJN"
+
+    };
+
+
+    /* =========================================
+       START FIREBASE
+       ========================================= */
+
+    const app =
+      initializeApp(firebaseConfig);
+
+
+    const auth =
+      getAuth(app);
+
+
+    const db =
+      getFirestore(app);
+
+
+    /* =========================================
+       ELEMENTS
+       ========================================= */
+
+    const loginBox =
+      document.getElementById("loginBox");
+
+    const adminPanel =
+      document.getElementById("adminPanel");
+
+    const loginBtn =
+      document.getElementById("loginBtn");
+
+    const logoutBtn =
+      document.getElementById("logoutBtn");
+
+    const loginMessage =
+      document.getElementById("loginMessage");
+
+    const admissionTable =
+      document.getElementById("admissionTable");
+
+    const totalCount =
+      document.getElementById("totalCount");
+
+    const searchBox =
+      document.getElementById("searchBox");
+
+
+    let allAdmissions = [];
+
+
+    /* =========================================
+       LOGIN
+       ========================================= */
+
+    loginBtn.addEventListener(
+      "click",
+      async function() {
+
+        const email =
+          document
+            .getElementById("email")
+            .value
+            .trim();
+
+
+        const password =
+          document
+            .getElementById("password")
+            .value;
+
+
+        if (!email || !password) {
+
+          loginMessage.textContent =
+            "Please enter email and password.";
+
+          loginMessage.className =
+            "message error";
+
+          return;
+        }
+
+
+        try {
+
+          await signInWithEmailAndPassword(
+            auth,
+            email,
+            password
+          );
+
+
+          loginMessage.textContent = "";
+
+        }
+
+        catch (error) {
+
+          loginMessage.textContent =
+            "Login failed. Please check email and password.";
+
+          loginMessage.className =
+            "message error";
+
+          console.error(error);
+
+        }
+
+      }
+    );
+
+
+    /* =========================================
+       AUTH STATE
+       ========================================= */
+
+    onAuthStateChanged(
+      auth,
+      async function(user) {
+
+        if (user) {
+
+          loginBox.style.display =
+            "none";
+
+          adminPanel.style.display =
+            "block";
+
+          logoutBtn.style.display =
+            "block";
+
+          await loadAdmissions();
+
+        }
+
+        else {
+
+          loginBox.style.display =
+            "block";
+
+          adminPanel.style.display =
+            "none";
+
+          logoutBtn.style.display =
+            "none";
+
+        }
+
+      }
+    );
+
+
+    /* =========================================
+       LOGOUT
+       ========================================= */
+
+    logoutBtn.addEventListener(
+      "click",
+      async function() {
+
+        await signOut(auth);
+
+      }
+    );
+
+
+    /* =========================================
+       LOAD ADMISSIONS
+       ========================================= */
+
+    async function loadAdmissions() {
+
+      admissionTable.innerHTML =
+        `
+          <tr>
+            <td colspan="7" class="empty">
+              Loading enquiries...
+            </td>
+          </tr>
+        `;
+
+
+      try {
+
+        const snapshot =
+          await getDocs(
+            collection(
+              db,
+              "admission"
+            )
+          );
+
+
+        allAdmissions = [];
+
+
+        snapshot.forEach(
+          function(item) {
+
+            allAdmissions.push({
+
+              id: item.id,
+
+              ...item.data()
+
+            });
+
+          }
+        );
+
+
+        displayAdmissions(
+          allAdmissions
+        );
+
+      }
+
+      catch (error) {
+
+        admissionTable.innerHTML =
+          `
+            <tr>
+              <td colspan="7" class="empty error">
+                Unable to load enquiries.
+                <br><br>
+                ${escapeHTML(error.message)}
+              </td>
+            </tr>
+          `;
+
+        console.error(error);
+
+      }
+
+    }
+
+
+    /* =========================================
+       DISPLAY ADMISSIONS
+       ========================================= */
+
+    function displayAdmissions(data) {
+
+      admissionTable.innerHTML = "";
+
+
+      totalCount.textContent =
+        "Total Enquiries: " +
+        data.length;
+
+
+      if (data.length === 0) {
+
+        admissionTable.innerHTML =
+          `
+            <tr>
+              <td
+                colspan="7"
+                class="empty"
+              >
+                No admission enquiries found.
+              </td>
+            </tr>
+          `;
+
+        return;
+
+      }
+
+
+      data.forEach(
+        function(item) {
+
+          let date = "";
+
+
+          if (item.createdAt) {
+
+            try {
+
+              if (
+                typeof item.createdAt.toDate ===
+                "function"
+              ) {
+
+                date =
+                  item.createdAt
+                    .toDate()
+                    .toLocaleString(
+                      "en-IN"
+                    );
+
+              }
+
+              else {
+
+                date =
+                  String(
+                    item.createdAt
+                  );
+
+              }
+
+            }
+
+            catch (e) {
+
+              date = "";
+
+            }
+
+          }
+
+
+          const row =
+            document.createElement("tr");
+
+
+          row.innerHTML = `
+
+            <td>
+              ${escapeHTML(
+                item.studentName || ""
+              )}
+            </td>
+
+            <td>
+              ${escapeHTML(
+                item.className || ""
+              )}
+            </td>
+
+            <td>
+              ${escapeHTML(
+                item.parentName || ""
+              )}
+            </td>
+
+            <td>
+              ${escapeHTML(
+                item.phone || ""
+              )}
+            </td>
+
+            <td>
+              ${escapeHTML(
+                item.address || ""
+              )}
+            </td>
+
+            <td>
+              ${escapeHTML(date)}
+            </td>
+
+            <td>
+
+              <button
+                class="deleteBtn"
+                data-id="${item.id}"
+              >
+                Delete
+              </button>
+
+            </td>
+
+          `;
+
+
+          const deleteButton =
+            row.querySelector(
+              ".deleteBtn"
+            );
+
+
+          deleteButton.addEventListener(
+            "click",
+            function() {
+
+              deleteAdmission(
+                item.id
+              );
+
+            }
+          );
+
+
+          admissionTable.appendChild(
+            row
+          );
+
+        }
+      );
+
+    }
+
+
+    /* =========================================
+       SEARCH
+       ========================================= */
+
+    searchBox.addEventListener(
+      "input",
+      function() {
+
+        const query =
+          searchBox.value
+            .toLowerCase()
+            .trim();
+
+
+        const filtered =
+          allAdmissions.filter(
+            function(item) {
+
+              return (
+
+                String(
+                  item.studentName || ""
+                )
+                .toLowerCase()
+                .includes(query)
+
+                ||
+
+                String(
+                  item.className || ""
+                )
+                .toLowerCase()
+                .includes(query)
+
+                ||
+
+                String(
+                  item.parentName || ""
+                )
+                .toLowerCase()
+                .includes(query)
+
+                ||
+
+                String(
+                  item.phone || ""
+                )
+                .toLowerCase()
+                .includes(query)
+
+                ||
+
+                String(
+                  item.address || ""
+                )
+                .toLowerCase()
+                .includes(query)
+
+              );
+
+            }
+          );
+
+
+        displayAdmissions(
+          filtered
+        );
+
+      }
+    );
+
+
+    /* =========================================
+       DELETE ADMISSION
+       ========================================= */
+
+    async function deleteAdmission(id) {
+
+      const confirmDelete =
+        confirm(
+          "Are you sure you want to delete this admission enquiry?"
+        );
+
+
+      if (!confirmDelete) {
+
+        return;
+
+      }
+
+
+      try {
+
+        await deleteDoc(
+          doc(
+            db,
+            "admission",
+            id
+          )
+        );
+
+
+        await loadAdmissions();
+
+
+        alert(
+          "Admission enquiry deleted successfully."
+        );
+
+      }
+
+      catch (error) {
+
+        alert(
+          "Delete failed: " +
+          error.message
+        );
+
+        console.error(error);
+
+      }
+
+    }
+
+
+    /* =========================================
+       SECURITY / HTML ESCAPE
+       ========================================= */
+
+    function escapeHTML(value) {
+
+      return String(value)
+
+        .replaceAll(
+          "&",
+          "&amp;"
+        )
+
+        .replaceAll(
+          "<",
+          "&lt;"
+        )
+
+        .replaceAll(
+          ">",
+          "&gt;"
+        )
+
+        .replaceAll(
+          '"',
+          "&quot;"
+        )
+
+        .replaceAll(
+          "'",
+          "&#039;"
+        );
+
+    }
+
+  </script>
+
+</body>
+</html>
