@@ -1,1 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>New Modern High School Patrara</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial, sans-serif;
+}
+
+body{
+  background:#f5f7fb;
+  color:#222;
+  line-height:1.6;
+}
+
+header{
+  background:#123b70;
+  color:white;
+  padding:15px 6%;
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
+
+.nav{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.logo-icon{
+  width:48px;
+  height:48px;
+  background:white;
+  color:#123b70;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:24px;
+  font-weight:bold;
+}
+
+.logo h2{
+  font-size:18px;
+}
+
+nav a{
+  color:white;
+  text-decoration:none;
+  margin-left:15px;
+  font-weight:bold;
+}
+
+.hero{
+  min-height:500px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:70px 20px;
+  background:linear-gradient(135deg,#123b70,#2876c7);
+  color:white;
+}
+
+.hero h1{
+  font-size:42px;
+  margin-bottom:15px;
+}
+
+.hero p{
+  font-size:20px;
+  margin-bottom:25px;
+}
+
+.btn{
+  display:inline-block;
+  background:#ffb300;
+  color:#111;
+  padding:13px 25px;
+  border-radius:8px;
+  text-decoration:none;
+  font-weight:bold;
+  margin:5px;
+}
+
+section{
+  padding:60px 7%;
+}
+
+.title{
+  text-align:center;
+  margin-bottom:35px;
+}
+
+.title h2{
+  color:#123b70;
+  font-size:32px;
+}
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:20px;
+}
+
+.card{
+  background:white;
+  padding:25px;
+  border-radius:12px;
+  box-shadow:0 4px 15px rgba(0,0,0,.08);
+  text-align:center;
+}
+
+.card h3{
+  color:#123b70;
+  margin-bottom:10px;
+}
+
+.about{
+  background:white;
+}
+
+.contact-box{
+  background:#123b70;
+  color:white;
+  border-radius:15px;
+  padding:35px;
+  text-align:center;
+}
+
+.contact-box a{
+  color:white;
+  text-decoration:none;
+}
+
+footer{
+  background:#0b274b;
+  color:white;
+  text-align:center;
+  padding:25px;
+}
+
+@media(max-width:700px){
+  .nav{
+    flex-direction:column;
+  }
+
+  nav a{
+    margin:5px;
+    display:inline-block;
+  }
+
+  .hero h1{
+    font-size:30px;
+  }
+
+  .hero p{
+    font-size:17px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="nav">
+
+    <div class="logo">
+      <div class="logo-icon">NM</div>
+      <h2>New Modern High School Patrara</h2>
+    </div>
+
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#facilities">Facilities</a>
+      <a href="#admission">Admission</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+  </div>
+</header>
+
+
+<section class="hero" id="home">
+  <div>
+    <h1>New Modern High School Patrara</h1>
+
+    <p>
+      Nursery to Class 10th | English Medium
+    </p>
+
+    <p>
+      Education • Discipline • Excellence
+    </p>
+
+    <a class="btn"
+       href="https://docs.google.com/forms/d/e/1FAIpQLSfJevQfpM7JVhUZw70b2d9ZYE2miXdFXjG5v9Z6LBsi_2r7iA/viewform?usp=header"
+       target="_blank">
+       Admission Enquiry
+    </a>
+  </div>
+</section>
+
+
+<section class="about" id="about">
+
+  <div class="title">
+    <h2>About Our School</h2>
+  </div>
+
+  <div class="card">
+
+    <h3>New Modern High School Patrara</h3>
+
+    <p>
+      New Modern High School Patrara is an English medium school
+      providing education from Nursery to Class 10th.
+    </p>
+
+    <p>
+      Our aim is to provide quality education, discipline,
+      confidence and overall development to every learner.
+    </p>
+
+  </div>
+
+</section>
+
+
+<section id="facilities">
+
+  <div class="title">
+    <h2>Our Facilities</h2>
+  </div>
+
+  <div class="cards">
+
+    <div class="card">
+      <h3>💻 Computer Lab</h3>
+      <p>Modern computer learning facilities for students.</p>
+    </div>
+
+    <div class="card">
+      <h3>⚽ Playground</h3>
+      <p>Sports and outdoor activities for overall development.</p>
+    </div>
+
+    <div class="card">
+      <h3>🚌 School Bus</h3>
+      <p>Transportation facility for students.</p>
+    </div>
+
+    <div class="card">
+      <h3>📚 Quality Education</h3>
+      <p>Focus on strong academic foundations and learning.</p>
+    </div>
+
+  </div>
+
+</section>
+
+
+<section id="admission" class="about">
+
+  <div class="title">
+    <h2>Admissions Open 2026-27</h2>
+  </div>
+
+  <div class="card">
+
+    <h3>Start Your Child's Journey With Us</h3>
+
+    <p>
+      Fill out our online admission enquiry form.
+    </p>
+
+    <br>
+
+    <a class="btn"
+       href="https://docs.google.com/forms/d/e/1FAIpQLSfJevQfpM7JVhUZw70b2d9ZYE2miXdFXjG5v9Z6LBsi_2r7iA/viewform?usp=header"
+       target="_blank">
+       Fill Admission Form
+    </a>
+
+  </div>
+
+</section>
+
+
+<section id="contact">
+
+  <div class="title">
+    <h2>Contact Us</h2>
+  </div>
+
+  <div class="contact-box">
+
+    <h3>New Modern High School Patrara</h3>
+
+    <p>📍 Patrara, Jammu & Kashmir</p>
+
+    <p>
+      📞
+      <a href="tel:9622232911">9622232911</a>
+      |
+      <a href="tel:9622023630">9622023630</a>
+    </p>
+
+    <p>
+      📧
+      <a href="mailto:modernacademypatrara@gmail.com">
+        modernacademypatrara@gmail.com
+      </a>
+    </p>
+
+    <p>
+      💬
+      <a href="https://wa.me/919622232911" target="_blank">
+        WhatsApp: 9622232911
+      </a>
+    </p>
+
+  </div>
+
+</section>
+
+
+<footer>
+
+  <p>© 2026 New Modern High School Patrara</p>
+
+  <p>All Rights Reserved</p>
+
+</footer>
+
+</body>
+</html>
